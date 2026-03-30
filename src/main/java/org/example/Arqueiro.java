@@ -26,14 +26,14 @@ public class Arqueiro extends Personagem {
         switch (escolha) {
             case 1:
                 System.out.println("\n>>> " + this.nome + " atirou uma [Flecha Perfurante]!");
-                alvo.receberDano(30);
+                alvo.receberDano(30, TipoDano.FISICO);
                 break;
             case 2:
                 System.out.println("\n>>> " + this.nome + " usou [Tiro Duplo]!");
                 System.out.println("Primeira flecha:");
-                alvo.receberDano(15);
+                alvo.receberDano(15, TipoDano.FISICO);
                 System.out.println("Segunda flecha:");
-                alvo.receberDano(15);
+                alvo.receberDano(15, TipoDano.FISICO);
                 break;
             case 3:
                 System.out.println("\n>>> " + this.nome + " jogou uma [Bomba de Fumaça] no chão!");
@@ -46,12 +46,12 @@ public class Arqueiro extends Personagem {
     }
 
     @Override
-    public void receberDano(int dano) {
+    public void receberDano(int dano, TipoDano tipo) {
         Random gerador = new Random();
         if (gerador.nextInt(100) + 1 <= this.chanceEsquiva) {
             System.out.println("* INCRÍVEL! " + this.nome + " esquivou do ataque e não sofreu dano! *");
         } else {
-            super.receberDano(dano);
+            super.receberDano(dano, tipo);
         }
     }
 }

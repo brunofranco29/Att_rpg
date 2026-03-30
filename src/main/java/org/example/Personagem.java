@@ -19,6 +19,14 @@ public abstract class Personagem implements AcaoBatalha {
         System.out.println(this.nome + " recebeu " + dano + " de dano! (HP restante: " + this.vida + ")");
     }
 
+    public void receberDano(int dano, TipoDano tipo) {
+        this.vida -= dano;
+        if (this.vida < 0) {
+            this.vida = 0;
+        }
+        System.out.println(this.nome + " recebeu " + dano + " de dano " + tipo + "! (HP restante: " + this.vida + ")");
+    }
+
     public void curar(int valor) {
         this.vida += valor;
         System.out.println(this.nome + " recuperou " + valor + " de HP! (HP atual: " + this.vida + ")");
@@ -31,7 +39,7 @@ public abstract class Personagem implements AcaoBatalha {
     @Override
     public void atacar(Personagem alvo) {
         System.out.println("\n>>> " + this.nome + " deu um ataque básico em " + alvo.getNome() + "!");
-        alvo.receberDano(this.danoBase);
+        alvo.receberDano(this.danoBase, TipoDano.FISICO);
     }
 
     @Override
@@ -40,3 +48,4 @@ public abstract class Personagem implements AcaoBatalha {
     public String getNome() { return nome; }
     public int getVida() { return vida; }
 }
+

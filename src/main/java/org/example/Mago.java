@@ -23,29 +23,23 @@ public class Mago extends Personagem {
                 if (mana >= 15) {
                     mana -= 15;
                     System.out.println("\n>>> " + this.nome + " lançou [Bola de Fogo]!");
-                    alvo.receberDano(40);
-                } else {
-                    System.out.println("Sem mana para Bola de Fogo! Perdeu o turno.");
-                }
+                    alvo.receberDano(40, TipoDano.MAGICO); // Dano Mágico!
+                } else System.out.println("Sem mana para Bola de Fogo!");
                 break;
             case 2:
                 if (mana >= 20) {
                     mana -= 20;
                     System.out.println("\n>>> " + this.nome + " usou [Dreno de Vida]!");
-                    alvo.receberDano(20);
+                    alvo.receberDano(20, TipoDano.MAGICO); // Dano Mágico!
                     this.curar(15);
-                } else {
-                    System.out.println("Sem mana para Dreno de Vida! Perdeu o turno.");
-                }
+                } else System.out.println("Sem mana para Dreno de Vida!");
                 break;
             case 3:
                 if (mana >= 5) {
                     mana -= 5;
                     System.out.println("\n>>> " + this.nome + " disparou um [Choque Estático] rápido!");
-                    alvo.receberDano(15);
-                } else {
-                    System.out.println("Sem mana para Choque Estático! Perdeu o turno.");
-                }
+                    alvo.receberDano(15, TipoDano.MAGICO); // Dano Mágico!
+                } else System.out.println("Sem mana para Choque Estático!");
                 break;
             default:
                 System.out.println("Habilidade mágica desconhecida! Perdeu o turno.");

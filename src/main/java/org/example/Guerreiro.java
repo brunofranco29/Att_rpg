@@ -20,13 +20,13 @@ public class Guerreiro extends Personagem {
         switch (escolha) {
             case 1:
                 System.out.println("\n>>> " + this.nome + " usou [Golpe Demolidor]!");
-                alvo.receberDano(25);
+                alvo.receberDano(25, TipoDano.FISICO);
                 break;
             case 2:
                 System.out.println("\n>>> " + this.nome + " executou um [Ataque Furioso] com toda a força!");
-                alvo.receberDano(45);
-                System.out.println("* O impacto causou recuo! " + this.nome + " perdeu 10 de HP. *");
-                this.vida -= 10;
+                alvo.receberDano(45, TipoDano.FISICO);
+                System.out.println("* O impacto causou recuo! *");
+                this.receberDano(10, TipoDano.VERDADEIRO);
                 break;
             case 3:
                 System.out.println("\n>>> " + this.nome + " assumiu a [Postura Defensiva]!");
@@ -39,10 +39,15 @@ public class Guerreiro extends Personagem {
     }
 
     @Override
-    public void receberDano(int dano) {
-        int danoReduzido = dano - this.defesa;
-        if (danoReduzido < 0) danoReduzido = 0;
-        System.out.println("* A armadura de " + this.nome + " absorveu " + this.defesa + " de dano! *");
-        super.receberDano(danoReduzido);
+    public void receberDano(int dano, TipoDano tipo) {
+        if (tipo == TipoDano.FISICO) {
+            int danoReduzido = dano - this.defesa;
+            if (danoReduzido < 0) danoReduzido = 0;
+            System.out.println("* A armadura de " + this.nome + " absorveu " + this.defesa + " de dano FÍSICO! *");
+            super.receberDano(danoReduzido, tipo);
+        } else {
+            System.out.println("* A armadura de " + this.nome + " é inútil contra dano " + tipo + "! *");
+            super.receberDano(dano, tipo);
+        }
     }
 }
